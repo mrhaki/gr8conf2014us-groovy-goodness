@@ -1,0 +1,11 @@
+#!/usr/bin/env groovy
+
+def gitLog = [
+	'git', 'log',
+	'--max-count=1',
+	'--pretty=format:%an submitted %s [%h]'
+].execute()
+
+def message = gitLog.text
+
+['terminal-notifier', '-title', 'GIT commit', '-message', message].execute()
